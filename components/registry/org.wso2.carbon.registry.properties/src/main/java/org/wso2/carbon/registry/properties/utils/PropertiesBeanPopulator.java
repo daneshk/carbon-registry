@@ -78,7 +78,15 @@ public class PropertiesBeanPopulator {
             Property prop = new Property();
             prop.setKey((String) keys[i]);
             values = (List) properties.get(keys[i]);
-            prop.setValue((String) values.get(0));
+            if (values != null) {
+                String valueList = (String) values.get(0);
+                if (values.size() > 1) {
+                    for (int count = 1; count < values.size(); count++) {
+                        valueList += "," + values.get(count);
+                    }
+                }
+                prop.setValue(valueList);
+            }
             propArray[i] = prop;
 
             if (keys[i].equals("registry.link") &&
